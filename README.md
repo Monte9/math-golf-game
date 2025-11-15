@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Math Golf Game
+
+## Overview
+A puzzle game that combines golf scoring with mathematical operations. Players use "clubs" (math operations) to transform a starting number into a target number in as few moves ("strokes") as possible.
+
+## Core Mechanics
+
+### Gameplay
+- Each hole has a **starting value** (current yards) and a **target value** (goal yards)
+- Players select from 4 clubs to modify the current value:
+  - **Driver (×2)**: Multiply current value by 2
+  - **Wood (÷2)**: Divide current value by 2 (rounded down)
+  - **Wedge (-5)**: Subtract 5 from current value
+  - **Putter (+3)**: Add 3 to current value
+- Each club use counts as one stroke
+- Goal: Reach the exact target value in par strokes or fewer
+
+### Scoring System
+- **Par**: Target number of strokes for the hole
+- **Stroke Color Feedback**:
+  - Yellow: Game in progress
+  - Green: Reached target at or under par (success!)
+  - Red: Exceeded par (over budget)
+
+### Current Content
+- **3 holes** with varying difficulty:
+  - Hole 1 (Easy): 10 → 23 in par 2
+  - Hole 2 (Medium): 20 → 38 in par 3
+  - Hole 3 (Hard): 20 → 78 in par 4
+
+## Features
+
+- [x] Single hole gameplay with real-time feedback
+- [x] 4 basic clubs with math operations
+- [x] Stroke counter with color-coded feedback
+- [x] 3 visual themes (Dark Forest, Cyber Night, Midnight Neon)
+- [x] Responsive UI with header/main/footer layout
+- [ ] Dynamic hole selection/navigation
+- [ ] Support tier system for premium clubs (can just hard code toggle free or paid)
+- [ ] Implement progress tracking
+- [ ] Implement courses (multiple holes combined in a sequence)
+- [ ] Create a win/loss condition with score summary at end of round
+- [ ] Build a level editor or procedural generation system for infinite holes
+
+## Development Setup
+
+This is a [Next.js](https://nextjs.org) application built with React, TypeScript, and Tailwind CSS. The app is deployed on Vercel.
+
+### Tech Stack
+- **Framework**: Next.js 16 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS 4
+- **Package Manager**: pnpm
 
 ## Getting Started
 
-First, run the development server:
+Clone the repository and install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+git clone https://github.com/Monte9/math-golf-game
+cd math-golf-game
+pnpm install
+```
+
+Run the development server:
+
+```bash
 pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API
+- [Product Spec](./PRODUCT_SPEC.md) - detailed product specification and roadmap

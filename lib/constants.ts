@@ -1,31 +1,33 @@
-export const clubs = {
+import type { Clubs, Hole } from "./types";
+
+export const clubs: Clubs = {
   driver: {
     basic: {
       title: "Driver (x2)",
-      formula: (x) => x * 2,
+      formula: (x: number) => x * 2,
     },
   },
   wood: {
     basic: {
       title: "Wood (/2)",
-      formula: (x) => Math.floor(x / 2),
+      formula: (x: number) => Math.floor(x / 2),
     },
   },
   wedge: {
     basic: {
       title: "Wedge (-5)",
-      formula: (x) => x - 5,
+      formula: (x: number) => x - 5,
     },
   },
   putter: {
     basic: {
       title: "Putter (+3)",
-      formula: (x) => x + 3,
+      formula: (x: number) => x + 3,
     },
   },
 };
 
-export const holes = [
+export const holes: Hole[] = [
   {
     id: 1,
     difficulty: "easy",
