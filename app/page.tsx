@@ -3,11 +3,9 @@
 import { useState, useMemo } from "react";
 import Image from "next/image";
 import { holes, clubs } from "@/lib/constants";
-import type { Theme } from "@/lib/types";
+import { ThemeSelector } from "@/components/ThemeSelector";
 
 export default function Home() {
-  const [theme, setTheme] = useState<Theme>("forest");
-
   // TODO: Wire up dynamic hole here
   const hole = holes[2];
   const [current, setCurrent] = useState(hole.current);
@@ -38,19 +36,17 @@ export default function Home() {
     return "yellowStroke";
   }, [current, hole.yards, hole.par, strokes]);
 
-  const handleThemeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setTheme(e.target.value as Theme);
-  };
-
   return (
-    <div className={`app theme-${theme}`}>
-      <header className="headerBar">
-        <h2 className="appTitle">Math Golf Game</h2>
-        <p className="appSubtitle">
+    <div className="min-h-screen flex flex-col">
+      <header className="h-[20vh] bg-header-bg text-text-primary flex flex-col justify-center items-center gap-3 px-10">
+        <h2 className="text-text-primary text-center m-0 text-2xl font-semibold">
+          Math Golf Game
+        </h2>
+        <p className="text-text-muted text-center m-0">
           Reach the target yards in as few strokes as possible using your clubs.
         </p>
       </header>
-      <main className="mainArea">
+      <main className="flex-1 bg-main-bg flex justify-center items-center">
         <div className="holeContent">
           <div className="holeHeader">
             {/* <button className="holeNavButton">Prev</button> */}
@@ -82,7 +78,7 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <footer className="footerBar">
+      <footer className="h-[10vh] bg-footer-bg text-text-primary flex relative justify-center items-center">
         <a
           href="https://github.com/Monte9/math-golf-game"
           target="_blank"
@@ -96,18 +92,7 @@ export default function Home() {
             className="githubIcon"
           />
         </a>
-        <div className="themeDropdown">
-          <select
-            id="theme-select"
-            className="themeSelect"
-            value={theme}
-            onChange={handleThemeChange}
-          >
-            <option value="forest">Dark Forest</option>
-            <option value="cyber">Cyber Night</option>
-            <option value="midnight">Midnight Neon</option>
-          </select>
-        </div>
+        <ThemeSelector />
       </footer>
     </div>
   );

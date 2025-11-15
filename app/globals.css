@@ -1,23 +1,21 @@
 @import "tailwindcss";
 
-:root {
-  --body: #0f1c18;
-  --header-bg: #10231b;
-  --main-bg: #153829;
-  --footer-bg: #0f1c18;
-
-  --text-primary: #e9f7ef; /* off-white with a green lean */
-  --text-accent-green: #8ad2a4; /* for Par label etc. */
-  --text-accent-yellow: #f2d47a; /* warning */
-  --text-accent-red: #f27a7a; /* danger */
-
-  --button-bg: #153829;
-  --button-bg-hover: #1c4735;
-  --button-border: #245343;
-  --text-muted: #a9c3b5;
+@theme {
+  --color-body: var(--body);
+  --color-header-bg: var(--header-bg);
+  --color-main-bg: var(--main-bg);
+  --color-footer-bg: var(--footer-bg);
+  --color-text-primary: var(--text-primary);
+  --color-text-muted: var(--text-muted);
+  --color-text-accent-green: var(--text-accent-green);
+  --color-text-accent-yellow: var(--text-accent-yellow);
+  --color-text-accent-red: var(--text-accent-red);
+  --color-button-bg: var(--button-bg);
+  --color-button-bg-hover: var(--button-bg-hover);
+  --color-button-border: var(--button-border);
 }
 
-.theme-forest {
+.forest {
   --body: #0f1c18;
   --header-bg: #10231b;
   --main-bg: #153829;
@@ -34,7 +32,7 @@
   --text-muted: #a9c3b5;
 }
 
-.theme-cyber {
+.cyber {
   --body: #1a1b26;
   --header-bg: #1a1b26;
   --main-bg: #24283b;
@@ -51,7 +49,7 @@
   --text-muted: #9aa5ce;
 }
 
-.theme-midnight {
+.midnight {
   --body: #0d1117;
   --header-bg: #0d1117;
   --main-bg: #161b22;

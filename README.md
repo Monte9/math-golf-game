@@ -35,12 +35,11 @@ A puzzle game that combines golf scoring with mathematical operations. Players u
 - [x] Stroke counter with color-coded feedback
 - [x] 3 visual themes (Dark Forest, Cyber Night, Midnight Neon)
 - [x] Responsive UI with header/main/footer layout
-- [ ] Dynamic hole selection/navigation
-- [ ] Support tier system for premium clubs (can just hard code toggle free or paid)
-- [ ] Implement progress tracking
-- [ ] Implement courses (multiple holes combined in a sequence)
-- [ ] Create a win/loss condition with score summary at end of round
-- [ ] Build a level editor or procedural generation system for infinite holes
+- [x] Theme persistence with localStorage (remembers your theme choice)
+- [x] Tailwind CSS integration with theme system
+- [x] Component architecture with extracted ThemeSelector
+
+**See [SPEC.md](./SPEC.md) for the full development roadmap and upcoming features.**
 
 ## Development Setup
 
@@ -76,5 +75,6 @@ This project follows Next.js 16 best practices. For detailed architecture patter
 
 ## Learn More
 
-- [Next.js Documentation](https://nextjs.org/docs) - Next.js features and API
+- [SPEC.md](./SPEC.md) - Development roadmap and feature priorities
 - [AGENTS.md](./AGENTS.md) - Architecture patterns and best practices for AI agents
+- [Next.js Documentation](https://nextjs.org/docs) - Next.js features and API

@@ -2,8 +2,6 @@ export type Difficulty = "easy" | "medium" | "hard";
 
 export type ClubTier = "basic" | "premium" | "elite";
 
-export type Theme = "forest" | "cyber" | "midnight";
-
 export type Club = {
   title: string;
   formula: (x: number) => number;
@@ -34,7 +32,7 @@ export type GameState = {
   currentHoleIndex: number;
   strokes: number;
   current: number;
-  theme: Theme;
+  theme: string;
 };
 
 export type Course = {

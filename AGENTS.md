@@ -48,6 +48,8 @@
   ├── page.tsx       # Main game (Client Component)
   ├── layout.tsx     # Root layout (Server Component)
   └── globals.css    # Global styles + theme system
+/components          # Reusable React components
+  └── ThemeSelector.tsx  # Theme dropdown (Client Component)
 /lib                 # Utilities and shared code
   ├── types.ts       # TypeScript definitions
   └── constants.ts   # Game data (clubs, holes)
@@ -56,7 +58,7 @@
 
 ### Conventions
 - **`/lib`** - For utilities, helpers, constants, and types
-- **`/components`** - When adding reusable components (not created yet)
+- **`/components`** - For reusable components (Client or Server)
 - **`/app`** - Pages and layouts only
 - **`/hooks`** - Custom React hooks (create when needed)
 
@@ -110,33 +112,65 @@ export const clubs = {...} as const satisfies Clubs
 
 ## 🎨 Styling System
 
-### CSS Variables for Theming
+### Theming with next-themes + CSS Variables
 
-The app uses CSS variables for dynamic theming without JavaScript overhead.
+The app uses `next-themes` for theme management with CSS variables for dynamic theming.
 
 **Structure:**
 ```css
-:root { /* Default theme variables */ }
-.theme-forest { /* Forest theme overrides */ }
-.theme-cyber { /* Cyber theme overrides */ }
-.theme-midnight { /* Midnight theme overrides */ }
+@theme {
+  /* Tailwind color mappings */
+  --color-body: var(--body);
+  --color-header-bg: var(--header-bg);
+  /* ... more mappings */
+}
+
+.forest { /* Forest theme variables */ }
+.cyber { /* Cyber theme variables */ }
+.midnight { /* Midnight theme variables */ }
 ```
 
-**Variables:**
-- `--body`, `--header-bg`, `--main-bg`, `--footer-bg` - Background colors
-- `--text-primary`, `--text-muted` - Text colors
-- `--text-accent-green`, `--text-accent-yellow`, `--text-accent-red` - Status colors
-- `--button-bg`, `--button-bg-hover`, `--button-border` - Interactive elements
+**Setup:**
+```tsx
+// app/layout.tsx (Server Component)
+import { ThemeProvider } from 'next-themes'
 
-**Usage:**
-1. State in component: `const [theme, setTheme] = useState<Theme>("forest")`
-2. Apply to root: `<div className={`app theme-${theme}`}>`
-3. CSS automatically applies theme variables
+<ThemeProvider 
+  attribute="class" 
+  defaultTheme="forest"
+  themes={["forest", "cyber", "midnight"]}  // ⚠️ Required! Tells next-themes valid theme names
+>
+  {children}
+</ThemeProvider>
+
+// components/ThemeSelector.tsx (Client Component)
+"use client";
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
+
+export function ThemeSelector() {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null; // Prevents hydration mismatch
+  
+  // ... dropdown UI using theme and setTheme
+}
+```
+
+**Critical:** The `themes` array in `ThemeProvider` is essential for theme switching to work. Without it, `next-themes` won't properly apply theme classes to the HTML element.
+
+**Benefits:**
+- Automatic localStorage persistence
+- SSR-safe (no hydration mismatches)
+- System preference detection
+- Works seamlessly with CSS variables
 
 ### Tailwind CSS Usage
 - Use for layout utilities (flex, grid, spacing)
-- **Don't** use for colors/themes (use CSS variables instead)
-- This allows dynamic theming without Tailwind JIT overhead
+- Use theme colors via Tailwind: `bg-body`, `text-text-primary`, `bg-header-bg`
+- Configured via `@theme` block in `globals.css` (Tailwind CSS 4)
 
 ---
 
@@ -226,11 +260,13 @@ export const metadata: Metadata = {
 - Consistent with modern TypeScript practices
 - Single keyword for all type definitions
 
-### Why CSS variables over Tailwind for themes?
-- Dynamic theming without JavaScript overhead
-- No Tailwind JIT recompilation for theme changes
-- Easier to maintain color schemes
-- Still use Tailwind for layout utilities
+### Why next-themes + CSS variables?
+- Automatic localStorage persistence (no manual implementation)
+- SSR-safe theme switching (no hydration mismatches)
+- Dynamic theming without page reloads
+- Works perfectly with Tailwind CSS 4
+- Easy to add new themes (just add CSS class)
+- System preference detection built-in
 
 ### Why `/lib` for types?
 - Next.js convention for shared utilities
