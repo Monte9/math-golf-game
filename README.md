@@ -70,7 +70,11 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Contributing
+
+This project follows Next.js 16 best practices. For detailed architecture patterns, coding standards, and AI agent context, see [AGENTS.md](./AGENTS.md).
+
 ## Learn More
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API
-- [Product Spec](./PRODUCT_SPEC.md) - detailed product specification and roadmap
+- [Next.js Documentation](https://nextjs.org/docs) - Next.js features and API
+- [AGENTS.md](./AGENTS.md) - Architecture patterns and best practices for AI agents
