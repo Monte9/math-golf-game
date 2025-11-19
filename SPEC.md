@@ -39,6 +39,9 @@ Pick items from here to move into Phase 1:
 - [ ] Extract `<HoleInfo>` component (yards, par, current, strokes display)
 - [ ] Add error boundary for graceful error handling
 - [ ] Add unit tests for game logic
+- [ ] Implement "Trash Talker" (AI Commentary) - Snarky reactions to player moves
+- [ ] Implement "AI Caddy" (Tool Calling) - Helper that calculates best moves
+- [ ] Implement "Course Architect" (Structured Output) - Generate custom courses
 
 ### Low Priority / Future Ideas
 - [ ] Premium club tiers system (toggle free vs paid, hard-coded for now)
