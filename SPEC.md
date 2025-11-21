@@ -31,6 +31,20 @@ Pick items from here to move into Phase 1:
 
 ### High Priority
 
+**UX Issues (User Feedback):**
+
+- [ ] Fix layout overflow - bottom message area is below the fold on mobile
+- [ ] Add "Continue" or "Next Hole" button when hole is completed successfully
+- [ ] Improve clarity of "Yards" vs "Current" labels (users find it confusing)
+- [ ] Add instant retry/reset button after first move (for accidental wrong moves)
+
+**New Features:**
+
+- [ ] Add timer that counts up while playing, stops when hole is solved (becomes PR/record)
+- [ ] Add persistence (localStorage) - preserve current hole and progress on page refresh
+
+**Existing Items:**
+
 - [ ] Implement win condition UI (modal or screen when hole is completed)
 - [ ] Add progress tracking (save completed holes to localStorage)
 - [ ] Create course system (group holes into playable sequences)
@@ -56,7 +70,6 @@ Pick items from here to move into Phase 1:
 - [ ] Leaderboard system
 - [ ] Multiplayer/competitive mode
 - [ ] Undo/redo functionality
-- [ ] Hint system (show optimal solution)
 - [ ] Sound effects and animations
 - [ ] Mobile-optimized touch controls
 - [ ] Dark mode toggle (in addition to themes)
