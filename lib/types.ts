@@ -1,6 +1,8 @@
-export type Difficulty = "easy" | "medium" | "hard";
+export type Difficulty = "easy" | "medium" | "hard" | "expert";
 
 export type ClubTier = "basic" | "premium" | "elite";
+
+export type ClubKey = "driver" | "wood" | "wedge" | "putter";
 
 export type Club = {
   title: string;
@@ -26,6 +28,7 @@ export type Hole = {
   yards: number;
   par: number;
   current: number;
+  solution?: ClubKey[];
 };
 
 export type GameState = {

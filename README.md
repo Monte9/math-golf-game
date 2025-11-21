@@ -45,6 +45,9 @@ A puzzle game that combines golf scoring with mathematical operations. Players u
 - [x] Responsive Mobile/Desktop Navigation (Fixed Top Navbar & Bottom Tab Bar)
 - [x] Settings Page with Theme Selector and About section
 - [x] Dedicated Landing Page (`/`) and Game Page (`/play`)
+- [x] Dynamic hole navigation with prev/next buttons
+- [x] Retry functionality with solution reveal when exceeding par
+- [x] Difficulty badges for each hole
 
 **See [SPEC.md](./SPEC.md) for the full development roadmap and upcoming features.**
 
@@ -87,6 +90,8 @@ Project documentation is maintained in the `docs/` folder:
 
 - **Architecture specs**: Design decisions and implementation details for major features
 - **Before committing**: Update relevant docs to reflect your changes
+
+> **Note**: When establishing new coding patterns, update [`AGENTS.md`](./AGENTS.md) to ensure consistency across AI-assisted development.
 
 ## Learn More
 

@@ -15,6 +15,8 @@
 
 > **📚 Documentation Reminder**: Before committing changes, update relevant documentation in the `docs/` folder to reflect new features, architecture changes, or design decisions.
 
+> **🤖 Architecture Patterns**: When establishing new coding patterns or conventions, update `AGENTS.md` to ensure all AI agents follow the same standards.
+
 ---
 
 ## 🚀 Phase 1: Active Work
@@ -29,10 +31,7 @@ Pick items from here to move into Phase 1:
 
 ### High Priority
 
-- [ ] Add dynamic hole navigation (prev/next buttons to cycle through holes)
-- [ ] Fix hard-coded hole selection (currently stuck on `holes[2]`)
 - [ ] Implement win condition UI (modal or screen when hole is completed)
-- [ ] Add reset button to restart current hole
 - [ ] Add progress tracking (save completed holes to localStorage)
 - [ ] Create course system (group holes into playable sequences)
 - [ ] Add win/loss summary screen at end of course

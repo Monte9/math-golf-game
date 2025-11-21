@@ -178,11 +178,19 @@ body {
   color: var(--text-primary);
   cursor: pointer;
   transition: background-color 0.15s ease, transform 0.1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.holeNavButton:hover {
+.holeNavButton:hover:not(:disabled) {
   background-color: var(--button-bg-hover);
   transform: translateY(-1px);
+}
+
+.holeNavButton:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
 
 /* Hole content - Info */
@@ -253,22 +261,6 @@ body {
   width: 100%;
 }
 
-@keyframes pulse {
-  0% {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2),
-      0 2px 4px -1px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  }
-  50% {
-    box-shadow: 0 6px 10px -1px rgba(0, 0, 0, 0.25),
-      0 3px 6px -1px rgba(0, 0, 0, 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  }
-  100% {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2),
-      0 2px 4px -1px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  }
-}
-
 .clubButton {
   width: 100%;
   aspect-ratio: 1;
@@ -288,7 +280,6 @@ body {
   text-align: center;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2),
     0 2px 4px -1px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  animation: pulse 3s ease-in-out infinite;
 }
 
 /* Only apply hover effects on devices that support hover (desktop) */
@@ -299,7 +290,6 @@ body {
     border-color: rgba(255, 255, 255, 0.2);
     box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.35),
       0 6px 8px -2px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-    animation: none;
   }
 }
 
@@ -307,7 +297,6 @@ body {
   transform: translateY(1px) scale(0.98);
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2),
     inset 0 2px 4px rgba(0, 0, 0, 0.15);
-  animation: none;
 }
 
 /* GitHub icon */
