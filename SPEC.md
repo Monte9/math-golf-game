@@ -21,47 +21,63 @@
 
 ## 🚀 Phase 1: Active Work
 
-- [ ] (Select items from Backlog to start next phase)
-
----
-
-## 📋 Backlog: Prioritized Items
-
-Pick items from here to move into Phase 1:
-
-### High Priority
-
-**UX Issues (User Feedback):**
+**UX Refinements (User Feedback):**
 
 - [ ] Fix layout overflow - bottom message area is below the fold on mobile
 - [ ] Add "Continue" or "Next Hole" button when hole is completed successfully
 - [ ] Improve clarity of "Yards" vs "Current" labels (users find it confusing)
 - [ ] Add instant retry/reset button after first move (for accidental wrong moves)
 
-**New Features:**
+**Core Features:**
 
 - [ ] Add timer that counts up while playing, stops when hole is solved (becomes PR/record)
 - [ ] Add persistence (localStorage) - preserve current hole and progress on page refresh
 
-**Existing Items:**
+---
+
+## 📅 Phase 2: Core Gameplay & Polish
+
+**Game Mechanics:**
 
 - [ ] Implement win condition UI (modal or screen when hole is completed)
 - [ ] Add progress tracking (save completed holes to localStorage)
 - [ ] Create course system (group holes into playable sequences)
 - [ ] Add win/loss summary screen at end of course
+- [ ] Extract `<GameBoard>`, `<ClubSelector>`, and `<HoleInfo>` components
 
-### Medium Priority
+**Infrastructure:**
 
-- [ ] Extract `<GameBoard>` component (main game area)
-- [ ] Extract `<ClubSelector>` component (club buttons)
-- [ ] Extract `<HoleInfo>` component (yards, par, current, strokes display)
 - [ ] Add error boundary for graceful error handling
 - [ ] Add unit tests for game logic
+- [ ] **Schema Validation**: Use `zod` for all data validation (user input, AI responses)
+
+---
+
+## 🤖 Phase 3: AI & Technical Infrastructure
+
+**AI Integration (Vercel AI SDK):**
+
+- [ ] **Core Integration**: Start with `generateText` for basic responses
+- [ ] **Tool Calling**: Explore `tool` definitions for game actions (e.g., "calculate shot")
+- [ ] **Streaming**: Implement `streamText` for real-time commentary
+- [ ] **UI Components**: Use Vercel's `useMessages` hook for chat UI (vs custom parser)
+- [ ] **Prompt Engineering**: Use XML structure for prompts (proven to give better results)
+- [ ] **Structured Output**: Use `streamBlock` or `generateObject` for structured game data
+
+**AI Features:**
+
 - [ ] Implement "Trash Talker" (AI Commentary) - Snarky reactions to player moves
 - [ ] Implement "AI Caddy" (Tool Calling) - Helper that calculates best moves
 - [ ] Implement "Course Architect" (Structured Output) - Generate custom courses
 
-### Low Priority / Future Ideas
+**Analytics:**
+
+- [ ] **User Analytics**: Integrate Mixpanel for tracking game events and user journey
+- [ ] **Cost Tracking**: Track AI token usage and costs in Supabase DB
+
+---
+
+## 🔮 Future Ideas / Backlog
 
 - [ ] Premium club tiers system (toggle free vs paid, hard-coded for now)
 - [ ] Procedural hole generation (infinite gameplay)
