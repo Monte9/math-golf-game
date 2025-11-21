@@ -5,6 +5,7 @@
 ## 📋 How to Use This Document
 
 **The Mandate:**
+
 1. **Phase 1** is what you're actively working on (can be 1 or more items)
 2. When an item is **complete**, move it to `README.md` as a checked item `[x]`
 3. **Backlog** holds all future work as individual items (not grouped)
@@ -12,11 +13,13 @@
 5. Keep descriptions simple - one sentence per item
 6. This is the source of truth for what's next
 
+> **📚 Documentation Reminder**: Before committing changes, update relevant documentation in the `docs/` folder to reflect new features, architecture changes, or design decisions.
+
 ---
 
 ## 🚀 Phase 1: Active Work
 
-Nothing in active work - pick items from backlog below!
+- [ ] (Select items from Backlog to start next phase)
 
 ---
 
@@ -25,6 +28,7 @@ Nothing in active work - pick items from backlog below!
 Pick items from here to move into Phase 1:
 
 ### High Priority
+
 - [ ] Add dynamic hole navigation (prev/next buttons to cycle through holes)
 - [ ] Fix hard-coded hole selection (currently stuck on `holes[2]`)
 - [ ] Implement win condition UI (modal or screen when hole is completed)
@@ -34,6 +38,7 @@ Pick items from here to move into Phase 1:
 - [ ] Add win/loss summary screen at end of course
 
 ### Medium Priority
+
 - [ ] Extract `<GameBoard>` component (main game area)
 - [ ] Extract `<ClubSelector>` component (club buttons)
 - [ ] Extract `<HoleInfo>` component (yards, par, current, strokes display)
@@ -44,6 +49,7 @@ Pick items from here to move into Phase 1:
 - [ ] Implement "Course Architect" (Structured Output) - Generate custom courses
 
 ### Low Priority / Future Ideas
+
 - [ ] Premium club tiers system (toggle free vs paid, hard-coded for now)
 - [ ] Procedural hole generation (infinite gameplay)
 - [ ] Level editor (create custom holes)

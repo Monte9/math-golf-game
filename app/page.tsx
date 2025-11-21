@@ -1,99 +1,57 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import Image from "next/image";
-import { holes, clubs } from "@/lib/constants";
-import { ThemeSelector } from "@/components/ThemeSelector";
+import Link from "next/link";
+import { Flag } from "lucide-react";
+import { AppLayout } from "@/components/layout/AppLayout";
 
 export default function Home() {
-  // TODO: Wire up dynamic hole here
-  const hole = holes[2];
-  const [current, setCurrent] = useState(hole.current);
-  const [strokes, setStrokes] = useState(0);
-
-  const handleAction = (clubKey: string) => {
-    // TODO: we default to basic clubs here
-    // In the future we can add different tiers
-    const club = clubs[clubKey as keyof typeof clubs]?.basic;
-    if (!club) {
-      console.warn("Invalid club:", clubKey);
-      return;
-    }
-
-    setCurrent((prev) => club.formula(prev));
-    setStrokes((prev) => prev + 1);
-  };
-
-  const strokeColor = useMemo(() => {
-    if (current === hole.yards && strokes <= hole.par) {
-      return "greenStroke";
-    }
-
-    if (strokes > hole.par) {
-      return "redStroke";
-    }
-
-    return "yellowStroke";
-  }, [current, hole.yards, hole.par, strokes]);
-
   return (
-    <div className="min-h-screen flex flex-col">
-      <header className="h-[20vh] bg-header-bg text-text-primary flex flex-col justify-center items-center gap-3 px-10">
-        <h2 className="text-text-primary text-center m-0 text-2xl font-semibold">
-          Math Golf Game
-        </h2>
-        <p className="text-text-muted text-center m-0">
-          Reach the target yards in as few strokes as possible using your clubs.
-        </p>
-      </header>
-      <main className="flex-1 bg-main-bg flex justify-center items-center">
-        <div className="holeContent">
-          <div className="holeHeader">
-            {/* <button className="holeNavButton">Prev</button> */}
-            <h2 className="holeTitle">Hole 1</h2>
-            {/* <button className="holeNavButton">Next</button> */}
-          </div>
-          <div className="holeInfo">
-            <div className="holeInfoRow">
-              <p className="yardsTitle">Yards: {hole.yards}</p>
-              <p className="parTitle">Par: {hole.par}</p>
-            </div>
-            <div className="holeInfoRow">
-              <p className="currentTitle">Current: {current}</p>
-              <p className={`strokeTitle ${strokeColor}`}>Strokes: {strokes}</p>
-            </div>
-          </div>
-          <div className="clubsContainer">
-            {Object.entries(clubs).map(([key, club]) => {
-              return (
-                <button
-                  key={key}
-                  className="clubButton"
-                  onClick={() => handleAction(key)}
-                >
-                  {club.basic.title}
-                </button>
-              );
-            })}
-          </div>
+    <AppLayout>
+      <div className="flex-1 flex flex-col items-center justify-center min-h-[60vh] py-12 px-4 text-center gap-8">
+        <div className="flex flex-col items-center gap-4 max-w-2xl">
+          <h1 className="text-4xl md:text-6xl font-bold text-text-primary tracking-tight">
+            Math Golf
+          </h1>
+          <p className="text-lg md:text-xl text-text-muted leading-relaxed">
+            A puzzle game that combines golf scoring with mathematical
+            operations. Use clubs to transform numbers and reach the target in
+            par strokes or fewer.
+          </p>
         </div>
-      </main>
-      <footer className="h-[10vh] bg-footer-bg text-text-primary flex relative justify-center items-center">
-        <a
-          href="https://github.com/Monte9/math-golf-game"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            src="/github-logo.png"
-            alt="Github"
-            width={44}
-            height={44}
-            className="githubIcon"
-          />
-        </a>
-        <ThemeSelector />
-      </footer>
-    </div>
+
+        <div className="flex flex-col gap-6 items-center w-full max-w-md">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full text-left">
+            <div className="bg-header-bg/50 p-4 rounded-xl border border-white/10 backdrop-blur-sm">
+              <h3 className="font-semibold text-text-primary mb-2">Plan</h3>
+              <p className="text-sm text-text-muted">
+                Analyze the target number and your available clubs.
+              </p>
+            </div>
+            <div className="bg-header-bg/50 p-4 rounded-xl border border-white/10 backdrop-blur-sm">
+              <h3 className="font-semibold text-text-primary mb-2">
+                Calculate
+              </h3>
+              <p className="text-sm text-text-muted">
+                Apply operations to reach the goal efficiently.
+              </p>
+            </div>
+            <div className="bg-header-bg/50 p-4 rounded-xl border border-white/10 backdrop-blur-sm">
+              <h3 className="font-semibold text-text-primary mb-2">Score</h3>
+              <p className="text-sm text-text-muted">
+                Complete holes under par to win.
+              </p>
+            </div>
+          </div>
+
+          <Link
+            href="/play"
+            className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 text-lg font-bold text-black bg-white hover:bg-gray-100 rounded-full transition-all hover:scale-105 shadow-lg hover:shadow-white/25 w-full md:w-auto"
+          >
+            <Flag className="w-6 h-6 group-hover:rotate-12 transition-transform" />
+            Let&apos;s Play
+          </Link>
+        </div>
+      </div>
+    </AppLayout>
   );
 }

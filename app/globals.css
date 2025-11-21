@@ -26,9 +26,9 @@
   --text-accent-yellow: #f2d47a;
   --text-accent-red: #f27a7a;
 
-  --button-bg: #153829;
-  --button-bg-hover: #1c4735;
-  --button-border: #245343;
+  --button-bg: #1c4232; /* Lighter than main-bg */
+  --button-bg-hover: #24523e;
+  --button-border: #2d664f;
   --text-muted: #a9c3b5;
 }
 
@@ -163,6 +163,9 @@ body {
   margin: 6px;
   text-align: center;
   color: var(--text-primary);
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 
 .holeNavButton {
@@ -186,6 +189,8 @@ body {
 .holeInfo {
   display: flex;
   flex-direction: column;
+  gap: 12px;
+  padding: 12px 0;
 }
 
 .holeInfoRow {
@@ -197,25 +202,29 @@ body {
 }
 
 .yardsTitle {
-  font-size: 18px;
+  font-size: 1.25rem;
+  font-weight: 600;
   color: var(--text-primary);
   margin: 0px;
 }
 
 .parTitle {
-  font-size: 16px;
+  font-size: 1.1rem;
+  font-weight: 600;
   color: var(--text-accent-green);
   margin: 0px;
 }
 
 .currentTitle {
-  font-size: 18px;
+  font-size: 1.25rem;
+  font-weight: 600;
   color: var(--text-primary);
   margin: 0px;
 }
 
 .strokeTitle {
-  font-size: 16px;
+  font-size: 1.1rem;
+  font-weight: 600;
   margin: 0px;
 }
 
@@ -237,29 +246,68 @@ body {
 
 /* Hole content - Clubs */
 .clubsContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 30px;
+  width: 100%;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2),
+      0 2px 4px -1px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 6px 10px -1px rgba(0, 0, 0, 0.25),
+      0 3px 6px -1px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+  100% {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2),
+      0 2px 4px -1px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+}
+
+.clubButton {
+  width: 100%;
+  aspect-ratio: 1;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: var(--button-bg);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  margin-top: 30px;
+  text-align: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2),
+    0 2px 4px -1px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  animation: pulse 3s ease-in-out infinite;
 }
 
-.clubButton {
-  width: 160px;
-  font-size: 16px;
-  padding: 6px 10px;
-  border-radius: 6px;
-  border: 1px solid var(--button-border);
-  background-color: var(--button-bg);
-  color: var(--text-primary);
-  cursor: pointer;
-  transition: background-color 0.15s ease, transform 0.1s ease;
+/* Only apply hover effects on devices that support hover (desktop) */
+@media (hover: hover) {
+  .clubButton:hover {
+    background-color: var(--button-bg-hover);
+    transform: translateY(-3px) scale(1.02);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.35),
+      0 6px 8px -2px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    animation: none;
+  }
 }
 
-.clubButton:hover {
-  background-color: var(--button-bg-hover);
-  transform: translateY(-1px);
+.clubButton:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2),
+    inset 0 2px 4px rgba(0, 0, 0, 0.15);
+  animation: none;
 }
 
 /* GitHub icon */
@@ -291,10 +339,19 @@ body {
   background-color: var(--main-bg);
   color: var(--text-primary);
   border: 1px solid var(--button-border);
-  border-radius: 4px;
-  padding: 4px 8px;
-  font-size: 0.85rem;
+  border-radius: 6px;
+  padding: 12px 40px 12px 16px;
+  font-size: 1rem;
+  min-height: 48px;
   user-select: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  /* Chevron Down SVG with white stroke */
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 16px;
 }
 
 .themeSelect:focus {

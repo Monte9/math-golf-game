@@ -3,7 +3,7 @@
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
-export function ThemeSelector() {
+export function ThemeSelector({ className = "" }: { className?: string }) {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -19,10 +19,10 @@ export function ThemeSelector() {
   if (!mounted) return null;
 
   return (
-    <div className="absolute right-8 bottom-8 flex items-center gap-2">
+    <div className={`flex items-center gap-2 ${className}`}>
       <select
         id="theme-select"
-        className="themeSelect"
+        className="themeSelect w-full"
         value={theme}
         onChange={(e) => setTheme(e.target.value)}
       >

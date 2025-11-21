@@ -1,11 +1,13 @@
 # Math Golf Game
 
 ## Overview
+
 A puzzle game that combines golf scoring with mathematical operations. Players use "clubs" (math operations) to transform a starting number into a target number in as few moves ("strokes") as possible.
 
 ## Core Mechanics
 
 ### Gameplay
+
 - Each hole has a **starting value** (current yards) and a **target value** (goal yards)
 - Players select from 4 clubs to modify the current value:
   - **Driver (×2)**: Multiply current value by 2
@@ -16,6 +18,7 @@ A puzzle game that combines golf scoring with mathematical operations. Players u
 - Goal: Reach the exact target value in par strokes or fewer
 
 ### Scoring System
+
 - **Par**: Target number of strokes for the hole
 - **Stroke Color Feedback**:
   - Yellow: Game in progress
@@ -23,6 +26,7 @@ A puzzle game that combines golf scoring with mathematical operations. Players u
   - Red: Exceeded par (over budget)
 
 ### Current Content
+
 - **3 holes** with varying difficulty:
   - Hole 1 (Easy): 10 → 23 in par 2
   - Hole 2 (Medium): 20 → 38 in par 3
@@ -38,6 +42,9 @@ A puzzle game that combines golf scoring with mathematical operations. Players u
 - [x] Theme persistence with localStorage (remembers your theme choice)
 - [x] Tailwind CSS integration with theme system
 - [x] Component architecture with extracted ThemeSelector
+- [x] Responsive Mobile/Desktop Navigation (Fixed Top Navbar & Bottom Tab Bar)
+- [x] Settings Page with Theme Selector and About section
+- [x] Dedicated Landing Page (`/`) and Game Page (`/play`)
 
 **See [SPEC.md](./SPEC.md) for the full development roadmap and upcoming features.**
 
@@ -46,6 +53,7 @@ A puzzle game that combines golf scoring with mathematical operations. Players u
 This is a [Next.js](https://nextjs.org) application built with React, TypeScript, and Tailwind CSS. The app is deployed on Vercel.
 
 ### Tech Stack
+
 - **Framework**: Next.js 16 (App Router)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS 4
@@ -72,6 +80,13 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Contributing
 
 This project follows Next.js 16 best practices. For detailed architecture patterns, coding standards, and AI agent context, see [AGENTS.md](./AGENTS.md).
+
+## Documentation
+
+Project documentation is maintained in the `docs/` folder:
+
+- **Architecture specs**: Design decisions and implementation details for major features
+- **Before committing**: Update relevant docs to reflect your changes
 
 ## Learn More
 
