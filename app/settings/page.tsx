@@ -59,7 +59,7 @@ export default function SettingsPage() {
         {/* Footer Info */}
         <div className="mt-auto pt-8 flex flex-col items-center justify-center gap-6 opacity-80">
           <a
-            href="https://github.com/Monte9/math-golf-game"
+            href="https://github.com/nexuslabsx/math-golf-game"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:scale-110 transition-transform hover:opacity-100"

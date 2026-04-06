@@ -67,7 +67,7 @@ This is a [Next.js](https://nextjs.org) application built with React, TypeScript
 Clone the repository and install dependencies:
 
 ```bash
-git clone https://github.com/Monte9/math-golf-game
+git clone https://github.com/nexuslabsx/math-golf-game
 cd math-golf-game
 pnpm install
 ```
