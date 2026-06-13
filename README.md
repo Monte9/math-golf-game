@@ -1,100 +1,97 @@
-# Math Golf Game
+# Math Golf
 
-## Overview
+A puzzle game that turns mental math into a round of golf. Every hole gives you a number and a target — pick the right "clubs" (math operations) to land exactly on the target in par strokes or fewer.
 
-A puzzle game that combines golf scoring with mathematical operations. Players use "clubs" (math operations) to transform a starting number into a target number in as few moves ("strokes") as possible.
+**Play it live:** [mathgolfgame.vercel.app](https://mathgolfgame.vercel.app)
 
-## Core Mechanics
+[![Live Demo](https://img.shields.io/badge/demo-mathgolfgame.vercel.app-2ea44f)](https://mathgolfgame.vercel.app)
+[![Next.js 16](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org)
+[![Built with Claude Code](https://img.shields.io/badge/built%20with-Claude%20Code-d97757)](https://claude.com/claude-code)
 
-### Gameplay
+![Math Golf — Hole 1 in the Dark Forest theme](docs/screenshots/play.png)
 
-- Each hole has a **starting value** (current yards) and a **target value** (goal yards)
-- Players select from 4 clubs to modify the current value:
-  - **Driver (×2)**: Multiply current value by 2
-  - **Wood (÷2)**: Divide current value by 2 (rounded down)
-  - **Wedge (-5)**: Subtract 5 from current value
-  - **Putter (+3)**: Add 3 to current value
-- Each club use counts as one stroke
-- Goal: Reach the exact target value in par strokes or fewer
+## Why Math Golf?
 
-### Scoring System
+Golf scoring is a great fit for math puzzles: there's a target, a stroke budget, and the satisfaction of sinking it under par. Each club applies a fixed operation, so every hole becomes a tiny equation-search problem — can you see the path from 38 to 147 in five moves? Easy holes teach the club mechanics in two strokes; expert holes need six-stroke chains where one wrong club puts the target out of reach.
 
-- **Par**: Target number of strokes for the hole
-- **Stroke Color Feedback**:
-  - Yellow: Game in progress
-  - Green: Reached target at or under par (success!)
-  - Red: Exceeded par (over budget)
-
-### Current Content
-
-- **3 holes** with varying difficulty:
-  - Hole 1 (Easy): 10 → 23 in par 2
-  - Hole 2 (Medium): 20 → 38 in par 3
-  - Hole 3 (Hard): 20 → 78 in par 4
-
-## Features
-
-- [x] Single hole gameplay with real-time feedback
-- [x] 4 basic clubs with math operations
-- [x] Stroke counter with color-coded feedback
-- [x] 3 visual themes (Dark Forest, Cyber Night, Midnight Neon)
-- [x] Responsive UI with header/main/footer layout
-- [x] Theme persistence with localStorage (remembers your theme choice)
-- [x] Tailwind CSS integration with theme system
-- [x] Component architecture with extracted ThemeSelector
-- [x] Responsive Mobile/Desktop Navigation (Fixed Top Navbar & Bottom Tab Bar)
-- [x] Settings Page with Theme Selector and About section
-- [x] Dedicated Landing Page (`/`) and Game Page (`/play`)
-- [x] Dynamic hole navigation with prev/next buttons
-- [x] Retry functionality with solution reveal when exceeding par
-- [x] Difficulty badges for each hole
-
-**See [SPEC.md](./SPEC.md) for the full development roadmap and upcoming features.**
-
-## Development Setup
-
-This is a [Next.js](https://nextjs.org) application built with React, TypeScript, and Tailwind CSS. The app is deployed on Vercel.
-
-### Tech Stack
-
-- **Framework**: Next.js 16 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS 4
-- **Package Manager**: pnpm
-
-## Getting Started
-
-Clone the repository and install dependencies:
+## Quick Start
 
 ```bash
 git clone https://github.com/nexuslabsx/math-golf-game
 cd math-golf-game
 pnpm install
-```
-
-Run the development server:
-
-```bash
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) and hit **Let's Play**. Production build is `pnpm build`.
 
-## Contributing
+## How to Play
 
-This project follows Next.js 16 best practices. For detailed architecture patterns, coding standards, and AI agent context, see [AGENTS.md](./AGENTS.md).
+Each hole shows the target (**Yards**), your stroke budget (**Par**), and your current number (**Current**). Tap a club to apply its operation — each tap costs one stroke:
 
-## Documentation
+| Club | Operation |
+| --- | --- |
+| Driver | ×2 |
+| Wood | ÷2 (rounded down) |
+| Wedge | −5 |
+| Putter | +3 |
 
-Project documentation is maintained in the `docs/` folder:
+Land exactly on the target at or under par to win the hole. The stroke counter stays yellow while you play, turns green when you sink it at or under par, and red once you've blown past par — at which point you can retry the hole or reveal the solution sequence.
 
-- **Architecture specs**: Design decisions and implementation details for major features
-- **Before committing**: Update relevant docs to reflect your changes
+There are **10 hand-crafted holes** across four difficulty tiers:
 
-> **Note**: When establishing new coding patterns, update [`AGENTS.md`](./AGENTS.md) to ensure consistency across AI-assisted development.
+| Difficulty | Holes | Par |
+| --- | --- | --- |
+| Easy | 3 | 2 |
+| Medium | 2 | 3 |
+| Hard | 2 | 4 |
+| Expert | 3 | 5–6 |
 
-## Learn More
+## Features
 
-- [SPEC.md](./SPEC.md) - Development roadmap and feature priorities
-- [AGENTS.md](./AGENTS.md) - Architecture patterns and best practices for AI agents
-- [Next.js Documentation](https://nextjs.org/docs) - Next.js features and API
+- **10 holes, 4 clubs:** Difficulty ramps from two-stroke warmups to six-stroke expert chains, with prev/next navigation and a difficulty badge on every hole
+- **Color-coded scoring:** Live stroke feedback (in progress / under par / over par), with par and under-par celebration messages
+- **Retry & reveal:** Going over par offers an instant retry plus an optional step-by-step solution for the hole
+- **3 visual themes:** Dark Forest, Cyber Night, and Midnight Neon, persisted across visits via `next-themes`
+- **Responsive layout:** Fixed top navbar on desktop, native-feeling bottom tab bar on mobile
+- **Dedicated pages:** Landing (`/`), game (`/play`), settings (`/settings`), and a chat page (`/chat`) reserved for upcoming AI features
+
+## Architecture
+
+- **Next.js 16** (App Router, Turbopack) with **React 19** and **TypeScript 5**
+- **Tailwind CSS 4** for styling; themes implemented as CSS custom properties switched by `next-themes` class attribute
+- Game logic lives in a single custom hook ([`app/play/hook.ts`](app/play/hook.ts)); pages stay presentational
+- Hole and club data are plain typed constants ([`lib/constants.ts`](lib/constants.ts), [`lib/types.ts`](lib/types.ts)) — clubs are just `(x: number) => number` formulas, so adding clubs or holes is a data change, not a code change
+- Icons from `lucide-react`, package management with `pnpm`, deployed on Vercel
+
+## How it was built
+
+The game started as a CodeSandbox prototype and was migrated into this Next.js app, then developed spec-first with AI agents:
+
+- [`SPEC.md`](SPEC.md) is the living roadmap — active work, phases, and backlog
+- [`AGENTS.md`](AGENTS.md) is the source of truth for architecture patterns and coding standards that AI agents follow
+- [`docs/`](docs/) holds design specs for major features (e.g., the mobile navigation system)
+
+Completed roadmap items graduate from `SPEC.md` into the feature list above. Most of the implementation was done with [Claude Code](https://claude.com/claude-code); the checked-in [`.claude/settings.json`](.claude/settings.json) makes builds work out of the box in Claude Code cloud sessions.
+
+## Development
+
+```
+/app                  # App Router pages (landing, play, chat, settings)
+  /play/hook.ts       # Game state & scoring logic
+/components           # ThemeSelector + responsive layout (navbar, tab bar)
+/lib                  # Types, game data (clubs & holes), helpers
+/docs                 # Feature specs and screenshots
+```
+
+- `pnpm dev` — run locally with hot reload
+- `pnpm build` — production build
+- `pnpm lint` — ESLint
+
+## Roadmap
+
+Next up (see [`SPEC.md`](SPEC.md) for the full list): hole timers with personal records, progress persistence, course sequences with summary scoring, and AI features built on the Vercel AI SDK — a snarky commentary bot, an AI caddy that suggests moves, and a course architect that generates custom holes.
+
+## Credits
+
+Made by [Monte Thakkar](https://x.com/montethakkar), built with [Claude Code](https://claude.com/claude-code).
