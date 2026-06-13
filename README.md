@@ -5,6 +5,7 @@ A puzzle game that turns mental math into a round of golf. Every hole gives you 
 **Play it live:** [mathgolfgame.vercel.app](https://mathgolfgame.vercel.app)
 
 [![Live Demo](https://img.shields.io/badge/demo-mathgolfgame.vercel.app-2ea44f)](https://mathgolfgame.vercel.app)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![Next.js 16](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org)
 [![Built with Claude Code](https://img.shields.io/badge/built%20with-Claude%20Code-d97757)](https://claude.com/claude-code)
 
@@ -95,3 +96,7 @@ Next up (see [`SPEC.md`](SPEC.md) for the full list): hole timers with personal 
 ## Credits
 
 Made by [Monte Thakkar](https://x.com/montethakkar), built with [Claude Code](https://claude.com/claude-code).
+
+## License
+
+[MIT](LICENSE) © Monte Thakkar
