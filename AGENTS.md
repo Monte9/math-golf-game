@@ -394,7 +394,10 @@ const outfit = Outfit({
 <body className={outfit.className}>{children}</body>;
 ```
 
-**Benefits:** Self-hosted, no external requests, no layout shift
+**Benefits:** Self-hosted at runtime (no external requests once built), no layout shift.
+
+> ⚠️ The font is fetched from Google Fonts **at build/dev time**. Behind a
+> TLS-intercepting proxy this fails — see [Local Dev & Cloud Sandbox](#-local-dev--cloud-sandbox-agent-notes).
 
 ### Image Optimization
 
@@ -421,6 +424,72 @@ export const metadata: Metadata = {
   },
 };
 ```
+
+---
+
+## 🤖 Local Dev & Cloud Sandbox (Agent Notes)
+
+Hard-won setup details so the next agent (or human) doesn't rediscover them.
+
+### Build/dev needs network for fonts (TLS gotcha)
+
+`app/layout.tsx` loads `Outfit` via `next/font/google`. Next downloads the font
+**at build/dev time** (it's self-hosted at runtime, but the fetch happens during
+`next build`/`next dev`). In a sandbox with a TLS-intercepting proxy, that fetch
+fails with a TLS error and the build aborts:
+
+```
+next/font: error: Failed to fetch `Outfit` from Google Fonts.
+```
+
+**Fix (already applied):** `.claude/settings.json` sets
+`NEXT_TURBOPACK_EXPERIMENTAL_USE_SYSTEM_TLS_CERTS=1`, so every Claude Code
+session gets it automatically — `pnpm build` and `pnpm dev` just work. If you
+run outside Claude Code and hit this, export that var yourself:
+
+```bash
+NEXT_TURBOPACK_EXPERIMENTAL_USE_SYSTEM_TLS_CERTS=1 pnpm build
+```
+
+Do **not** remove that env var from `.claude/settings.json` — it's load-bearing
+for cloud builds. (A fully offline-proof alternative would be migrating Outfit
+to `next/font/local` with the font file committed; not done yet.)
+
+### Screenshotting the app in a headless sandbox
+
+There is **no `chromium-cli`** in this environment. Playwright is installed
+globally and the Chromium binary lives at a non-obvious path. Recipe that works:
+
+```bash
+# 1. Start the dev server (background) and poll the port — don't `sleep`
+NEXT_TURBOPACK_EXPERIMENTAL_USE_SYSTEM_TLS_CERTS=1 pnpm dev > /tmp/dev.log 2>&1 &
+echo $! > /tmp/dev.pid
+timeout 60 bash -c 'until curl -sf http://localhost:3000 >/dev/null; do sleep 1; done'
+
+# 2. Drive headless Chromium via global Playwright (CommonJS, absolute require)
+PLAYWRIGHT_BROWSERS_PATH=/opt/pw-browsers node /tmp/shot.cjs
+
+# 3. Stop the server
+kill $(cat /tmp/dev.pid)
+```
+
+`/tmp/shot.cjs`:
+
+```js
+const { chromium } = require("/opt/node22/lib/node_modules/playwright");
+(async () => {
+  const browser = await chromium.launch({ args: ["--no-sandbox"] });
+  const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+  await page.goto("http://localhost:3000/play", { waitUntil: "networkidle" });
+  await page.getByText("Hole 1").waitFor();
+  await page.screenshot({ path: "/tmp/play.png" });
+  await browser.close();
+})();
+```
+
+Key gotchas: require Playwright by **absolute path** (it's global, not a repo
+dep), set `PLAYWRIGHT_BROWSERS_PATH=/opt/pw-browsers`, and launch with
+`--no-sandbox`. Committed reference screenshots live in `docs/screenshots/`.
 
 ---
 
