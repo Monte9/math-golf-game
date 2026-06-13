@@ -6,3 +6,4 @@ node_modules
 
 # Nextjs
 .next/
+next-env.d.ts
